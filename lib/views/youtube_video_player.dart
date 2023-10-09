@@ -9,13 +9,13 @@ class YoutubeVideoPlayerScreen extends StatefulWidget {
 
 class _YoutubeVideoPlayerScreenState extends State<YoutubeVideoPlayerScreen> {
  late YoutubePlayerController _controller;
- //String youTubelVideoUrl ='https://youtu.be/3JbyTOTIQa8?si=Ciyz13QofqiSWwdv';
 
   @override
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: '4IenX7OHumk',
+      /// the URL of the video is: https://www.youtube.com/watch?v=4IenX7OHumk. Therefore, the ID of the video is 4IenX7OHumk .
       flags:const YoutubePlayerFlags(
         autoPlay: true,
         mute: true,
