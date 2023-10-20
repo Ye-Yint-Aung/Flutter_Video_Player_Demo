@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:video_demo/home/home.dart';
-import 'package:video_demo/views/video_player.dart';
+import 'package:video_demo/ui_testing.dart';
 
 void main() {
+  /*  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[DeviceOrientation.portraitUp, DeviceOrientation.landscapeLeft, DeviceOrientation.portraitDown, DeviceOrientation.landscapeRight]);
+ */
   runApp(const MyApp());
 }
 
@@ -16,12 +19,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: UiTestingScreen(),
     );
   }
 }
-
