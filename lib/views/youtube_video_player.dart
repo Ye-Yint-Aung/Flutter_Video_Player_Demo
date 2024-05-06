@@ -16,8 +16,6 @@ class _YoutubeVideoPlayerScreenState extends State<YoutubeVideoPlayerScreen> {
     super.initState();
     _controller = YoutubePlayerController(
       initialVideoId: '4IenX7OHumk',
-
-      /// the URL of the video is: https://www.youtube.com/watch?v=4IenX7OHumk. Therefore, the ID of the video is 4IenX7OHumk .
       flags: const YoutubePlayerFlags(
         autoPlay: true,
         mute: true,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_demo/ui_testing.dart';
 
+import 'home/home.dart';
+
 void main() {
   /*  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: UiTestingScreen(),
+      home: HomeScreen(),
     );
   }
 }

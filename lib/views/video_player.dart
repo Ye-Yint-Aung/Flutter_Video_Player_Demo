@@ -11,9 +11,7 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   late VideoPlayerController controller;
 
-  String videoUrl =
-      //'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
-      'https://dsqqu7oxq6o1v.cloudfront.net/motion-array-1236368-Spaceship_01-high.mp4';
+  String videoUrl = "https://www.shutterstock.com/shutterstock/videos/1023770083/preview/stock-footage-circa-s-american-industrial-might-in-includes-giant-textile-factories.webm";
 
   bool _isPlayBtnClick = true;
   double _currentSliderSecondaryValue = 0.0;
@@ -22,8 +20,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     controller = VideoPlayerController.networkUrl(Uri.parse(videoUrl));
-    _currentSliderSecondaryValue =
-        controller.value.position.inMilliseconds.toDouble();
+    _currentSliderSecondaryValue = controller.value.position.inMilliseconds.toDouble();
     controller.addListener(() {
       setState(() {});
     });
@@ -36,6 +33,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  String formatDuration(Duration duration) {
+    int hours = duration.inHours;
+    int minutes = duration.inMinutes.remainder(60);
+    int seconds = duration.inSeconds.remainder(60);
+    return '$hours:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
   @override
@@ -64,32 +68,24 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(
-                    "${controller.value.position.inHours}:${controller.value.position.inMinutes.remainder(60)}:${(controller.value.position.inSeconds.remainder(60))}"),
+                Text(formatDuration(controller.value.position)),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     child: SliderTheme(
-                      data: SliderThemeData(
-                          activeTrackColor: Colors.blue,
-                          inactiveTrackColor: Colors.black,
-                          trackHeight: 3,
-                          overlayShape: SliderComponentShape.noThumb),
+                      data: SliderThemeData(activeTrackColor: Colors.blue, inactiveTrackColor: Colors.black, trackHeight: 3, overlayShape: SliderComponentShape.noThumb),
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
                           Padding(
-                            padding:const EdgeInsets.symmetric(horizontal: 1),
+                            padding: const EdgeInsets.symmetric(horizontal: 1),
                             child: Slider(
                               min: 0.0,
-                              max: controller.value.duration.inMilliseconds
-                                  .toDouble(),
-                              value: controller.value.position.inMilliseconds
-                                  .toDouble(),
+                              max: controller.value.duration.inMilliseconds.toDouble(),
+                              value: controller.value.position.inMilliseconds.toDouble(),
                               onChanged: (value) {
                                 setState(() {
-                                  controller.seekTo(
-                                      Duration(milliseconds: value.toInt()));
+                                  controller.seekTo(Duration(milliseconds: value.toInt()));
                                 });
                               },
                             ),
@@ -99,8 +95,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     ),
                   ),
                 ),
-                Text(
-                    "${controller.value.duration.inHours}:${controller.value.duration.inMinutes.remainder(60)}:${(controller.value.duration.inSeconds.remainder(60))}")
+                Text(formatDuration(controller.value.duration - controller.value.position)),
               ],
             ),
             Row(
@@ -113,7 +108,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     icon: const Icon(Icons.skip_previous)),
                 IconButton(
                     onPressed: () {
-                      //_isPlayBtnClick? true : false;
                       if (_isPlayBtnClick == true) {
                         setState(() {
                           _isPlayBtnClick = false;
@@ -126,9 +120,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         });
                       }
                     },
-                    icon: _isPlayBtnClick
-                        ? const Icon(Icons.play_arrow)
-                        : const Icon(Icons.pause)),
+                    icon: _isPlayBtnClick ? const Icon(Icons.play_arrow) : const Icon(Icons.pause)),
                 IconButton(
                     onPressed: () {
                       print("You clicked Next Button");
